@@ -29,7 +29,13 @@ export class SynchronizeService {
   }
 
   async list(): Promise<void> {
-    const entries = await this.sender.list();
+    const entries = new Array<IEntry>();
+    try {
+      entries.push(...(await this.sender.list()));
+      this.logger.error(`Found ${entries.length} entries`);
+    } catch (e) {
+      this.logger.error(`Error while listing entries ${e}`);
+    }
 
     await Promise.all(entries.map((el) => this.syncTimeEntries(el)));
   }

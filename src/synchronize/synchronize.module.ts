@@ -25,5 +25,6 @@ import { TmetricModule, TmetricServiceAdapter } from '../tmetric';
       inject: [RedmineService],
     },
   ],
+  exports: [SynchronizeService],
 })
 export class SynchronizeModule {}
